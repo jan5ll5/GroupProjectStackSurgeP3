@@ -19,6 +19,8 @@ public class MovingCube : MonoBehaviour
 
         CurrentCube = this;
         GetComponent<Renderer>().material.color = GetRandomColor();
+
+        transform.localScale = new Vector3(LastCube.transform.localScale.x, transform.localScale.y, LastCube.transform.localScale.z);
     }
 
     private Color GetRandomColor()
