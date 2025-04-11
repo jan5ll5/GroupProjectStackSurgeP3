@@ -4,24 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            if(MovingCube.CurrentCube != null)
-            {
-                MovingCube.CurrentCube.Stop();
-            }
-             
-
-            FindObjectOfType<CubeSpawner>().SpawnCube();
+            MovingCube.CurrentCube.Stop();
         }
     }
 }
