@@ -7,12 +7,16 @@ public class Lost : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Destroy(gameObject, 5f);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
+        if(transform.poisition.y < -5f)
+        {
+            Destroy(gameObject);
+        }
     }
+    
 }
