@@ -18,7 +18,7 @@ public class Tile : MonoBehaviour
         moveForward = false;
         if (moveX)
         {
-            transform.Translate(distance, 0, 0):
+            transform.Translate(distance, 0, 0);
         }
 
         else
@@ -45,12 +45,55 @@ public class Tile : MonoBehaviour
     {
         if (moveForward)
         {
-            if(distamc)
+            if(distance < maxDistance)
+            {
+                transform.Translate(stepLength, 0, 0);
+                distance += stepLength;
+            }
+            else
+            {
+                moveForward = false;
+            }
+        }
+        else
+        {
+            if (distance > -maxDistance)
+            {
+                transform.Translate(-stepLength, 0, 0);
+                distance -= stepLength;
+            }
+            else
+            {
+                moveForward = true;
+            }
         }
     }
 
     void MoveZ()
     {
-
+        if (moveForward)
+        {
+            if (distance < maxDistance)
+            {
+                transform.Translate(0, 0, stepLength);
+                distance += stepLength;
+            }
+            else
+            {
+                moveForward = false;
+            }
+        }
+        else
+        {
+            if (distance > -maxDistance)
+            {
+                transform.Translate(0, 0, -stepLength);
+                distance -= stepLength;
+            }
+            else
+            {
+                moveForward = true;
+            }
+        }
     }
 }

@@ -13,7 +13,7 @@ public class Lost : MonoBehaviour
     private void Update()
     {
         
-        if(transform.poisition.y < -5f)
+        if(transform.position.y < -5f)
         {
             Destroy(gameObject);
         }
