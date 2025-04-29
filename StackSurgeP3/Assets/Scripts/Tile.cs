@@ -96,4 +96,9 @@ public class Tile : MonoBehaviour
             }
         }
     }
+
+    public void ScaleTile()
+    {
+        if
+    }
 }

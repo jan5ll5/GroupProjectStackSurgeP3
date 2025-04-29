@@ -12,14 +12,14 @@ public class Spawner : MonoBehaviour
     List<GameObject> stack;
 
     bool hasGameStarted, hasGameFinished;
-
+    
     List<Color32> spectrum = new List<Color32>()
     {
         new Color32(0, 255, 33, 255), new Color32(167, 255, 0, 255), new Color32(230, 255, 0, 255), new Color32(255, 237, 0, 255), new Color32(255, 206, 0, 255), new Color32(255, 185, 0, 255), new Color32(255, 142, 0, 255), new Color32(255, 111, 0, 255), new Color32(255, 58, 0, 255), new Color32(255, 0, 0, 255), new Color32(255, 0, 121, 255), new Color32(255, 0, 164, 255), new Color32(241, 0, 255, 255), new Color32(209, 0, 255, 255), new Color32(178, 0, 255, 255)
     };
     int modifier;
     int colorIndex;
-
+    
     public static Spawner instance;
 
     private void Awake()
@@ -40,9 +40,12 @@ public class Spawner : MonoBehaviour
         stack = new List<GameObject>();
         hasGameFinished = false;
         hasGameStarted = true;
+       
         modifier = 1;
         colorIndex = 0;
+        stack.Add(bottomTile);
         stack[0].GetComponent<Renderer>().material.color = spectrum[0];
+        
         CreateTile();
     }
 
@@ -50,13 +53,23 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         if (hasGameFinished || !hasGameStarted) return;
+        if (Input.GetMouseButtonDown(0))
+        {
+            if(stack.Count > 1)
+            {
+                stack[stack.Count - 1].GetComponent<Tile>().ScaleTile();
+            }
+            if (hasGameFinished) return;
+            scoreText.text = (stack.Count - 1).ToString();
+            CreateTile();
+        }
     }
 
     void CreateTile()
     {
         GameObject previousTile = stack[stack.Count - 1];
         GameObject activeTile;
-        tile tileScript;
+        Tile tileScript;
 
         activeTile = Instantiate(tile);
         tileScript = activeTile.GetComponent<Tile>();
@@ -68,6 +81,16 @@ public class Spawner : MonoBehaviour
 
         }
 
-        activeTile.transform.position = new Vector3(previousTile.transform.position.x, + previousTile.transform.position.localScale.y, previousTile.transform.position.y, previousTile.transform.position.z);
+        activeTile.transform.position = new Vector3(previousTile.transform.position.x + previousTile.transform.localScale.y, previousTile.transform.position.y + previousTile.transform.localScale.y, previousTile.transform.position.z);
+        
+        colorIndex += modifier;
+        if(colorIndex == spectrum.Count || colorIndex == -1)
+        {
+            modifier *= -1;
+            colorIndex += 2 * modifier;
+        }
+
+        activeTile.GetComponent<Renderer>().material.color = spectrum[colorIndex];
+        
     }
 }

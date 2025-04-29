@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6409071077509071618}
   - component: {fileID: 4712224137025451434}
   - component: {fileID: 650847318099096735}
-  - component: {fileID: 1600404638795444675}
+  - component: {fileID: 7042399581745760018}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6549093783615750686}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.29, y: 0.97, z: 0}
+  m_LocalPosition: {x: -0.07, y: 0.97, z: 0}
   m_LocalScale: {x: 4, y: 1, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1600404638795444675
+--- !u!114 &7042399581745760018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
