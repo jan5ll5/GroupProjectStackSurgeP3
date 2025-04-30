@@ -93,4 +93,9 @@ public class Spawner : MonoBehaviour
         activeTile.GetComponent<Renderer>().material.color = spectrum[colorIndex];
         
     }
+
+    public void GameOver()
+    {
+
+    }
 }
