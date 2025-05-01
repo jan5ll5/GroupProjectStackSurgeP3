@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Spawner : MonoBehaviour
 {
     [SerializeField]
-    GameObject tile, bottomTile, startButton;
+    GameObject tile, bottomTile, startButton, restartButton, mainCamera;
 
     TMP_Text scoreText;
     List<GameObject> stack;
@@ -111,26 +111,26 @@ public class Spawner : MonoBehaviour
 
     public void GameOver()
     {
-        startButton.SetActive(true);
+        restartButton.SetActive(true);
         hasGameFinished = true;
         StartCoroutine(EndCamera());
     }
 
     IEnumerator EndCamera()
     {
-        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
-        Vector3 temp = camera.transform.position;
+        GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        Vector3 temp = mainCamera.transform.position;
         Vector3 final = new Vector3(temp.x, temp.y - stack.Count * 0.5f, temp.z);
-        float cameraSizeFinal = stack.Count * 0.65f;
-        while(camera.GetComponent<Camera>().orthographicSize < cameraSizeFinal)
+        float mainCameraSizeFinal = stack.Count * 0.65f;
+        while(mainCamera.GetComponent<Camera>().orthographicSize < mainCameraSizeFinal)
         {
-            camera.GetComponent<Camera>().orthographicSize += 0.2f;
-            temp = camera.transform.position;
+            mainCamera.GetComponent<Camera>().orthographicSize += 0.2f;
+            temp = mainCamera.transform.position;
             temp = Vector3.Lerp(temp, final, 0.2f);
-            camera.transform.position = temp;
+            mainCamera.transform.position = temp;
             yield return new WaitForSeconds(0.01f);
         }
-        camera.transform.position = final;
+        mainCamera.transform.position = final;
     }
 
     public void StartButton()
@@ -145,6 +145,19 @@ public class Spawner : MonoBehaviour
             hasGameStarted = true;
         }
     }
+    public void RestartButton()
+    {
+        if (hasGameFinished)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
+        else
+        {
+            restartButton.SetActive(false);
+            startButton.SetActive(true);
+            hasGameStarted = false;
 
+        }
+    }
    
 }
