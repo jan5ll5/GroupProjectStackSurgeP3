@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Spawner : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Spawner : MonoBehaviour
     List<GameObject> stack;
 
     bool hasGameStarted, hasGameFinished;
+   
     
     List<Color32> spectrum = new List<Color32>()
     {
@@ -65,6 +67,19 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    IEnumerator MoveCamera()
+    {
+        float moveLength = 1.0f;
+        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+        while(moveLength > 0)
+        {
+            float stepLength = 0.1f;
+            moveLength -= stepLength;
+            camera.transform.Translate(0, stepLength, 0, Space.World);
+            yield return new WaitForSeconds(0.05f);
+        }
+    }
+
     void CreateTile()
     {
         GameObject previousTile = stack[stack.Count - 1];
@@ -96,6 +111,40 @@ public class Spawner : MonoBehaviour
 
     public void GameOver()
     {
-
+        startButton.SetActive(true);
+        hasGameFinished = true;
+        StartCoroutine(EndCamera());
     }
+
+    IEnumerator EndCamera()
+    {
+        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+        Vector3 temp = camera.transform.position;
+        Vector3 final = new Vector3(temp.x, temp.y - stack.Count * 0.5f, temp.z);
+        float cameraSizeFinal = stack.Count * 0.65f;
+        while(camera.GetComponent<Camera>().orthographicSize < cameraSizeFinal)
+        {
+            camera.GetComponent<Camera>().orthographicSize += 0.2f;
+            temp = camera.transform.position;
+            temp = Vector3.Lerp(temp, final, 0.2f);
+            camera.transform.position = temp;
+            yield return new WaitForSeconds(0.01f);
+        }
+        camera.transform.position = final;
+    }
+
+    public void StartButton()
+    {
+        if (hasGameFinished)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
+        else
+        {
+            startButton.SetActive(false);
+            hasGameStarted = true;
+        }
+    }
+
+   
 }

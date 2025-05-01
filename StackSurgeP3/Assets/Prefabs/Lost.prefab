@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 6409071077509071618}
   - component: {fileID: 4712224137025451434}
   - component: {fileID: 650847318099096735}
-  - component: {fileID: 7042399581745760018}
+  - component: {fileID: -6398089438200347778}
+  - component: {fileID: 3058706761818549176}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: Lost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,7 +107,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7042399581745760018
+--- !u!114 &-6398089438200347778
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,7 +116,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 6549093783615750686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac80cf4a4dfb16b41822b401b8c3bbcc, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c79261382367d249bf8c01a5c3a7b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lostTile: {fileID: 6549093783615750686, guid: b125e57f6eb6f514b84917c4899f6224, type: 3}
+--- !u!54 &3058706761818549176
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6549093783615750686}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
